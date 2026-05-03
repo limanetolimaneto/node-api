@@ -1,10 +1,13 @@
+const UserModel = require("../models/user.model");
+
 class UserService {
     constructor(connect){
-        this.connect = connect
+        this.connect = connect,
+        this.userModel = new UserModel()
     }
 
-    async findAll(tableName){
-        return this.connect.all(tableName);
+    async findAll(){
+        return this.connect.all(this.userModel.getTableName());
     }
 
 }
