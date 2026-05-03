@@ -1,11 +1,10 @@
 class UserService {
     constructor(connect){
-        this.connect = connect,
-        this.tableName = 'users'
+        this.connect = connect
     }
 
-    async findAll(){
-        return this.connect.all(this.tableName);
+    async findAll(tableName){
+        return this.connect.all(tableName);
     }
 
 }

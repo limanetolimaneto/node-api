@@ -1,10 +1,12 @@
-class UserController {
+const UserModel = require("../models/user.model");
+
+class UserController extends UserModel{
     constructor(userService) {
         this.userService = userService;
     }
 
     async getUsers() {
-        return await this.userService.findAll();
+        return await this.userService.findAll(this.getTableName());
     }
 
     index = async (req, res) => {

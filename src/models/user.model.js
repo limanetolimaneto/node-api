@@ -1,8 +1,11 @@
-// class UserModel{
-//     construnct(tableName){
-//         this.tableName = "users";
-//     }
+class UserModel{
+    constructor(){
+        this.tableName = "users";
+    }
+    getTableName(){
+        return this.tableName
+    }
 
-// }
+}
 
-// module.exports = UserModel
+module.exports = UserModel
