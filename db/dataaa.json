@@ -1,0 +1,48 @@
+[
+  {
+    "users": [
+      {
+        "id": 1,
+        "name": "Lima Neto",
+        "email": "ln@email.com",
+        "password": "123"
+      },
+      {
+        "id": 2,
+        "name": "Flavia AI",
+        "email": "fai@email.com",
+        "password": "123"
+      },
+      {
+        "id": 3,
+        "name": "Novo Usuário",
+        "email": "novo@email.com",
+        "password": "123"
+      }
+    ],
+    "clients": [
+      {
+        "id": 1,
+        "name": "Joao Paulo",
+        "email": "jp@email.com",
+        "address": {
+          "number": "40",
+          "street": "Boulevard Avenue",
+          "town": "Paarl"
+        },
+        "password": "123"
+      },
+      {
+        "id": 2,
+        "name": "Marcos Antonio",
+        "email": "ma@email.com",
+        "address": {
+          "number": "86",
+          "street": "Lady Gray ST",
+          "town": "Paarl"
+        },
+        "password": "123"
+      }
+    ]
+  }
+]
