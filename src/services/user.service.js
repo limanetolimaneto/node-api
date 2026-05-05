@@ -27,9 +27,9 @@ class UserService {
     async update(id, user){
         const saltRounds = 12; 
         const updatedUser = this.userModel.getFields();
-        updatedUser.name = user.name? user.name : null;
-        updatedUser.email = user.email? user.email : null;
-        updatedUser.password = user.password? await bcrypt.hash(user.password, saltRounds) : null;
+        user.name? updatedUser.name =  user.name : null;
+        user.email? updatedUser.email =  user.email : null;
+        user.password? updatedUser.password =  await bcrypt.hash(user.password, saltRounds) : null;
         return await this.repo.updateUser(this.userModel.getTableName(), id, updatedUser);
 
     }

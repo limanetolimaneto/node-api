@@ -22,6 +22,8 @@ const container = new Container();
 
 require('./user.container')(container);
 
+require('./client.container')(container);
+
 module.exports = container;
 
 

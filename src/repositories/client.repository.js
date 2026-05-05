@@ -1,13 +1,31 @@
-const DataManager = require("./DataManager");
+class ClientRepository{
+    constructor(jsonRepository){
+        this.jsonRepository = jsonRepository;
+    }
 
-class ClientDataManager extends DataManager{
-    
-    create(data) {}
+    async listAllFromTable(table) {
+        return await this.jsonRepository.readTable(table);
+    }
 
-    update(id, data) {}
-    
-    delete(id) {}
+    async createNewClient(table, json) {
+        const newJson = {
+            id: await this.jsonRepository.lastId(table) + 1,
+            ...json
+        };
+        return await this.jsonRepository.writeOnTheTable(table, newJson);
+    }
+
+    async updateClient(table, id, json){
+        const tableData = await this.jsonRepository.readTable(table);
+        const clientTableData = tableData.find(item => item.id == id);
+        Object.assign(clientTableData, json);
+        return await this.jsonRepository.updateTable(table, id, clientTableData);
+    }
+
+    async deleteClient(table, id){
+        return await this.jsonRepository.deleteFromTable(table, id);
+    }
 
 }
 
-module.exports = ClientDataManager;
+module.exports = ClientRepository;

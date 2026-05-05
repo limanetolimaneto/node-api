@@ -3,29 +3,25 @@ class ClientController{
         this.service = clientService;
     }
 
-    async getClients() {
-        return await this.service.findAll();
+    index = async(req,res) => {
+        const allClients = await this.service.listAllClients();
+        return res.json(allClients);
     }
 
-    index = async (req, res) => {
-        const clients = await this.getClients();
-        return res.json(clients);
-    }
-
-    store = async (req, res) => {
+    store = async(req,res) => {
         const client = req.body;
         const newClient = await this.service.create(client);
         return res.json(newClient);
     }
 
-    update = async (req, res) => {
+    update = async(req,res) => {
         const id = req.params.id;
-        const client = req.body;
-        const newClient = await this.service.update(id, user);
+        const clientFields = req.body;
+        const newClient = await this.service.update(id, clientFields);
         return res.json(newClient);
     }
 
-    delete = async (req, res) => {
+    delete = async(req,res) => {
         const id = req.params.id;
         const deletedClient = await this.service.delete(id);
         return res.json(deletedClient);

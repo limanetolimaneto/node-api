@@ -2,27 +2,35 @@ const ClientModelClass = require("../models/client.model");
 const ClientModel = new ClientModelClass();
 
 class ClientService {
-    constructor(connect){
-        this.connect = connect;
+    constructor(repo){
+        this.repo = repo;
         this.clientModel = ClientModel;
     }
 
-    async findAll(){
-        return this.connect.all(this.clientModel.getTableName());
+    async listAllClients(){
+        return await this.repo.listAllFromTable(this.clientModel.getTableName());
     }
 
     async create(client){
-        return this.connect.create(this.clientModel.getTableName(),client);
+            
+        const newClient = this.clientModel.getFields();
+        newClient.name = client.name;
+        newClient.email = client.email;
+
+        return await this.repo.createNewClient(this.clientModel.getTableName(),newClient);
+    
     }
 
     async update(id, client){
-        return this.connect.update(this.clientModel.getTableName(), id, client);
+        const updatedClient = this.clientModel.getFields();
+        client.name? updatedClient.name = client.name : null;
+        client.email? updatedClient.email = client.email : null;
+        return await this.repo.updateClient(this.clientModel.getTableName(), id, updatedClient);
     }
 
     async delete(id){
-        return this.connect.delete(this.clientModel.getTableName(), id);
+        return await this.repo.deleteClient(this.clientModel.getTableName(), id);
     }
-
 
 }
 

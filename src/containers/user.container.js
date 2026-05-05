@@ -22,4 +22,5 @@ module.exports = (container) => {
     const userService = container.resolve('UserService');
     return new UserController(userService);
   });
+  
 };
