@@ -1,25 +1,25 @@
 const JsonRepository = require('../repositories/json.repository');
+const UserRepository = require('../repositories/user.repository');
 const UserService = require('../services/user.service');
 const UserController = require('../controllers/user.controllers');
-const UserCreater = require('../repositories/user.creater');
 
 module.exports = (container) => {
-  container.bind('UserCreater', () => {
-    return new UserCreater();
+  container.bind('JsonRepository', () => {
+    return new JsonRepository();
   });
 
   container.bind('UserRepository', (container) => {
-    const userCreater = container.resolve('UserCreater');
-    return new JsonRepository(userCreater);
+    const jsonRepository = container.resolve('JsonRepository');
+    return new UserRepository(jsonRepository);
   });
 
   container.bind('UserService', (container) => {
-    const repo = container.resolve('JsonRepository');
-    return new UserService(repo);
+    const userRepository = container.resolve('UserRepository');
+    return new UserService(userRepository);
   });
 
   container.bind('UserController', (container) => {
-    const service = container.resolve('UserService');
-    return new UserController(service);
+    const userService = container.resolve('UserService');
+    return new UserController(userService);
   });
 };
