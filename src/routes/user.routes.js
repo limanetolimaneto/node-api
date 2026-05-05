@@ -1,15 +1,9 @@
 const express = require('express');
 const router = express.Router();
+const container = require("../containers/container");
 
-//  “Controller, você não cria o service — eu vou te entregar um pronto.”
-const connectClass = require('../repositories/json.repository');
-const connect = new connectClass();
+const userController = container.resolve('UserController');
 
-const userServiceClass = require('../services/user.service')
-const userService = new userServiceClass(connect);
-
-const userControllerClass = require('../controllers/user.controllers');
-const userController = new userControllerClass(userService);
 
 // USER ENDPONTS ================================================
 

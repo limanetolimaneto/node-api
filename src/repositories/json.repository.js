@@ -1,11 +1,12 @@
 const path = require('path');
 const fs = require('fs/promises');
 const bcrypt = require("bcrypt");          // validar senha     =>  await bcrypt.compare(senhaPura, hash);
-const { table } = require('console');
+
 
 class JsonRepository{
-    constructor(){
+    constructor(userCreater){
         this.dbPath = path.join(__dirname,'../../db/data.json');
+        this.userCreater = userCreater;
     }
 
     async all(tableName){
@@ -27,6 +28,9 @@ class JsonRepository{
         data.users.push(newUser);
         await fs.writeFile(this.dbPath, JSON.stringify(data, null, 2));
         return newUser;
+    }
+
+    async createClient(data,client){
 
     }
 
@@ -34,11 +38,29 @@ class JsonRepository{
         const raw = await fs.readFile(this.dbPath,'utf-8');
         const data = JSON.parse(raw);
         
-        if(tableName === "users"){
-            return await this.createUser(data, json);
+        if (tableName === "users") {
+            return await this.userCreater.save(this.dbPath, data, json);
+        }
+
+        if(tableName === "clients"){
+            return await this.createClient( data, json);
         }
 
     }
+
+    // async create(tableName, json){
+    //     const raw = await fs.readFile(this.dbPath,'utf-8');
+    //     const data = JSON.parse(raw);
+        
+    //     if(tableName === "users"){
+    //         return await this.createUser(data, json);
+    //     }
+
+    //     if(tableName === "clients"){
+    //         return await this.createClient(data, json);
+    //     }
+
+    // }
 
     async updateUser(data, id, user){
         const userIndex = data.users.findIndex(u => u.id === Number(id));
