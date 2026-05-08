@@ -1,5 +1,5 @@
-const JsonRepository = require('../repositories/json.repository');
-const ClientRepository = require('../repositories/client.repository');
+const JsonRepository = require('../repositories/json/json.repository');
+const ClientRepository = require('../repositories/json/client.repository');
 const ClientService = require('../services/client.service');
 const ClientController = require('../controllers/client.controller');
 

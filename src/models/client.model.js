@@ -4,11 +4,7 @@ class ClientModel{
         this.fields = {
             "name": "",
             "email": "",
-            "address": {
-                "number": "",
-                "street": "",
-                "town": ""
-            },
+            "address": "",
         }
     };
 

@@ -3,7 +3,7 @@ const fs = require('fs/promises');
 
 class JsonRepository{
     constructor(){
-        this.dbPath = path.join(__dirname,'../../db/data.json');
+        this.dbPath = path.join(__dirname,'../../../db/data.json');
     }
 
     async lastId(table){

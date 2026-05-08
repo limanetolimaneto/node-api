@@ -1,16 +1,16 @@
-const JsonRepository = require('../repositories/json.repository');
-const UserRepository = require('../repositories/user.repository');
+const Repository = require('../repositories/mysql/mysql.repository');
+const UserRepository = require('../repositories/mysql/user.repository');
 const UserService = require('../services/user.service');
 const UserController = require('../controllers/user.controllers');
 
 module.exports = (container) => {
-  container.bind('JsonRepository', () => {
-    return new JsonRepository();
+  container.bind('Repository', () => {
+    return new Repository();
   });
 
   container.bind('UserRepository', (container) => {
-    const jsonRepository = container.resolve('JsonRepository');
-    return new UserRepository(jsonRepository);
+    const repository = container.resolve('Repository');
+    return new UserRepository(repository);
   });
 
   container.bind('UserService', (container) => {
